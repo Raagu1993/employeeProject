@@ -1,0 +1,71 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item pointer" (click)='goToEmployeeList()'>
+            Employee List
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Add</li>
+    </ol>
+</nav>
+<div class='margin'>
+    <form [formGroup]="empForm">
+        <div class="row">
+            <div class='col'>
+                <mat-form-field>
+                    <mat-label>Name
+                        <span class='required'>*</span>
+                    </mat-label>
+                    <input matInput formControlName="name">
+                    <mat-error>Name Required</mat-error>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>Email Id
+                        <span class='required'>*</span>
+                    </mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error>
+                        <span *ngIf="empForm.get('email').errors?.email">Enter Valid Email-Id</span>
+                        <span *ngIf="empForm.get('email').errors?.required">Email Required</span>
+                    </mat-error>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>Mobile Number
+                        <span class='required'>*</span>
+                    </mat-label>
+                    <input matInput formControlName="mobileNumber" pattern="^((\\+91-?)|0)?[0-9]{10}$">
+                    <mat-error>Enter Valid Mobile Number</mat-error>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>Designation
+                        <span class='required'>*</span>
+                    </mat-label>
+                    <input matInput formControlName="designation">
+                    <mat-error>Designation Required</mat-error>
+                </mat-form-field>
+                <br> Location
+                <div id="map"></div>
+                <div>
+                    {{address.suburb !== undefined ? address.suburb + ',' : ''}} {{address.state !== undefined ? address.state + ',' : ''}} {{address.city
+                    !== undefined ? address.city + '-' : ''}} {{address.postcode !== undefined ? address.postcode : ''}}
+                </div>
+            </div>
+            <div class='col d-flex justify-content-end'>
+                <div class="row upload-btn-wrapper pointer">
+                    <div></div>
+                    <div class='blank-image pointer' *ngIf="imagePath === ''">
+                        <img class='pointer' style="width:150px; height:150px;" src='assets/images/image.png'>
+                    </div>
+                    <input #imageInput type="file" accept="image/*" (change)="processImage($event)" />
+                    <img *ngIf="imagePath !== ''" [src]="previewUrl" class="img-upload pointer" />
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary" [disabled]="!empForm.valid" (click)='uploadImage()'>Submit</button>
+        </div>
+    </form>
+</div>
+<mat-spinner class='spinner' *ngIf='spinner'></mat-spinner>
+<div class="spinner_overlay" *ngIf='spinner'></div>

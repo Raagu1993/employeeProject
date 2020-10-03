@@ -1,0 +1,32 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item pointer" (click)='goToEmployeeList()'>
+            Employee List
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">{{employeeDetails.name}}</li>
+    </ol>
+</nav>
+<mat-card>
+    <div class="row">
+        <div class="col-sm-2">
+            <img [src]='employeeDetails.url'>
+        </div>
+        <div class="col-sm-10 profile">
+            <label>Name</label>: {{employeeDetails.name}}
+            <br>
+            <label>Email Id</label>: {{employeeDetails.email}}
+            <br>
+            <label>Mobile Number</label>: {{employeeDetails.mobileNumber}}
+            <br>
+            <label>Designation</label>: {{employeeDetails.designation}}
+            <br>
+        </div>
+    </div>
+</mat-card>
+<br>
+<label>Location</label>
+<div id="map"></div>
+<div>
+    {{address.suburb !== undefined ? address.suburb + ',' : ''}} {{address.state !== undefined ? address.state + ',' : ''}} {{address.city
+    !== undefined ? address.city + '-' : ''}} {{address.postcode !== undefined ? address.postcode : ''}}
+</div>
